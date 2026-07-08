@@ -27,7 +27,7 @@ def selecionar(tabela, coluna_filtro= None, valor_filtro = None):
     if coluna_filtro is None: #dps puxar o datetime.date como só data ou aparecer somente o números
         comando_selecionar = f"SELECT * FROM {tabela}"
         print(f"\nNa tabela {tabela} temos: {tabela} tabela(s)")
-        #cursor.execute(comando_selecionar)
+        cursor.execute(comando_selecionar)
     else:
         comando_selecionar = f"SELECT * FROM {tabela} WHERE {coluna_filtro} = %s"
         
@@ -114,7 +114,15 @@ while True:
         else:
             continue
     elif pergunta == 3:
-        deletar()
+        mostrar_tabelas()
+        resposta = int(input("\nDe qual tabela você quer deletar as informações?:\t"))
+        mostrar_colunas()
+        pergunta_2 = int(input("\nvocê quer filtrar por qual informação?: \t"))
+        pergunta_3 = input(f"DELETE FROM {table} WHERE {collumns[pergunta_2][0]} = ")
+        deletar(table, collumns[pergunta_2][0],pergunta_3)
+
+
+        # deletar()
 #PROXIMA ETAPA, CONCLUIR O [3] DELETE, para deletar as colunas.
 #FALTA:TELA DE LOGIN, TRATAMENTO DOS DADOS, ADIÇÃO DE FUNÇÕES
 # conexao.commit() isso é para atualizar as informações do bdd
